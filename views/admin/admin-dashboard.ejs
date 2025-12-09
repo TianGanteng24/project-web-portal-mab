@@ -4,181 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Portal Dashboard</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
-        /* Header */
-        .header {
-            background: #002d6b;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .header .title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .nav {
-            background: #ececec;
-            padding: 10px 30px;
-            display: flex;
-            gap: 20px;
-        }
-        .nav a {
-            text-decoration: none;
-            padding: 8px 15px;
-            background: #ddd;
-            border-radius: 4px;
-            color: black;
-        }
-        .nav a.active {
-            background: #bcd6ff;
-            font-weight: bold;
-        }
-        /* Dashboard Cards */
-        .container {
-            padding: 30px;
-        }
-        .cards {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .card {
-            background: white;
-            padding: 25px;
-            width: 150px;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .card h2 {
-            font-size: 32px;
-            margin: 0;
-        }
-        .card p {
-            margin-top: 8px;
-            font-size: 14px;
-            color: #555;
-        }
-        /* Total Member */
-        .total-member {
-            text-align: right;
-            margin-bottom: 40px;
-        }
-        .total-member h1 {
-            font-size: 48px;
-            margin: 0;
-            font-weight: bold;
-        }
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            margin-bottom: 40px;
-        }
-        table th, table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        table th {
-            background: #e7e7e7;
-        }
-        /* Simple Bar Chart */
-        .chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 20px;
-            height: 200px;
-            padding: 20px;
-        }
-        .bar {
-            width: 40px;
-            background: #6aa6ff;
-            text-align: center;
-            color: white;
-        }
-        .bar span {
-            position: relative;
-            top: -20px;
-        }
-    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-K5mXtUHQ5XKukdxbYlR5c+Y7PkF9vDOMkMt2rt7NmBGG99nmCaTKty+O+kO5OVwOBLRp5MNDoAuCEr0aKBdKg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-<body>
-    <div class="header">
-        <div class="title">WEB PORTAL</div>
-        <div>Hi, Medilink</div>
-    </div>
+<body class="bg-gray-100 font-sans">
+     <!-- HEADER -->
+    <header class="bg-[#002d6b] text-white px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <img src="" alt="icon mab" class="w-10" />
+            <h1 class="text-xl font-bold tracking-wide">WEB PORTAL</h1>
+        </div>
+        <div class="flex items-center gap-2">
+            <span>Hi, <%= user.username %></span>
+            <i class="fa-solid fa-user-tie text-2xl"></i>
+        </div>
+    </header>
 
-    <div class="nav">
-        <a href="#">Main Page</a>
-        <a class="active" href="#">Dashboard</a>
-        <a href="#">Member Data</a>
-        <a href="#">Submit Case</a>
-        <a href="#">Report</a>
-    </div>
+    <!-- NAV MENU -->
+    <nav class="bg-gray-200 px-8 py-3 flex gap-4 text-sm font-medium">
+        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Main Page</a>
+        <a href="/dashboard-admin" class="px-4 py-2 rounded bg-blue-200 font-bold">Dashboard</a>
+        <a href="/member-data" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Member Data</a>
+        <a href="/submit-case" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Submit Case</a>
+        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Report</a>
+    </nav>
 
-    <div class="container">
-        <h2>Dashboard</h2>
 
-        <div class="cards">
-            <div class="card">
-                <h2>24</h2><p>Case Submitted</p>
+    <div class="p-6">
+        <h2 class="text-2xl font-semibold mb-6">Dashboard</h2>
+
+        <!-- Dashboard Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <h2 class="text-3xl font-bold">24</h2>
+                <p class="text-gray-600">Case Submitted</p>
             </div>
-            <div class="card">
-                <h2>8</h2><p>Under Review</p>
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <h2 class="text-3xl font-bold">8</h2>
+                <p class="text-gray-600">Under Review</p>
             </div>
-            <div class="card">
-                <h2>15</h2><p>Completed</p>
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <h2 class="text-3xl font-bold">15</h2>
+                <p class="text-gray-600">Completed</p>
             </div>
-            <div class="card">
-                <h2>2</h2><p>Reports</p>
+            <div class="bg-white rounded-lg shadow p-6 text-center">
+                <h2 class="text-3xl font-bold">2</h2>
+                <p class="text-gray-600">Reports</p>
             </div>
         </div>
 
-        <div class="total-member">
-            <h3>Total Member</h3>
-            <h1>75,000</h1>
+        <!-- Total Member -->
+        <div class="text-right mb-10">
+            <h3 class="text-lg font-medium">Total Member</h3>
+            <h1 class="text-4xl font-extrabold">75,000</h1>
         </div>
 
-        <h3>Recent Submission</h3>
-        <table>
-            <tr>
-                <th>Submission ID</th>
-                <th>Date Submitted</th>
-                <th>Date</th>
-            </tr>
-            <tr>
-                <td>MEDI0101</td>
-                <td>01/01/2025</td>
-                <td>Completed</td>
-            </tr>
-            <tr>
-                <td>MEDI0102</td>
-                <td>11/01/2025</td>
-                <td>In Progress</td>
-            </tr>
-            <tr>
-                <td>MEDI0103</td>
-                <td>15/01/2025</td>
-                <td>In Progress</td>
-            </tr>
-        </table>
-
-        <div class="chart">
-            <div class="bar" style="height: 150px;"></div>
-            <div class="bar" style="height: 110px;"></div>
-            <div class="bar" style="height: 70px;"></div>
-            <div class="bar" style="height: 100px;"></div>
+        <!-- Recent Submission Table -->
+        <h3 class="text-lg font-semibold mb-2">Recent Submission</h3>
+        <div class="overflow-x-auto">
+            <table id="submissionTable" class="w-full bg-white rounded shadow">
+                <thead class="bg-gray-300">
+                    <tr>
+                        <th class="p-3 text-left">Submission ID</th>
+                        <th class="p-3 text-left">Date Submitted</th>
+                        <th class="p-3 text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="p-3 border">MEDI0101</td>
+                        <td class="p-3 border">01/01/2025</td>
+                        <td class="p-3 border">Completed</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 border">MEDI0102</td>
+                        <td class="p-3 border">11/01/2025</td>
+                        <td class="p-3 border">In Progress</td>
+                    </tr>
+                    <tr>
+                        <td class="p-3 border">MEDI0103</td>
+                        <td class="p-3 border">15/01/2025</td>
+                        <td class="p-3 border">In Progress</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <!-- Chart Section -->
+        <h3 class="text-lg font-semibold mt-10 mb-4">Submission Chart</h3>
+        <canvas id="submissionChart" class="w-full max-h-[400px]"></canvas>
     </div>
+
+    <!-- ChartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const tableRows = document.querySelectorAll('#submissionTable tbody tr');
+        const labels = [];
+        const data = [];
+
+        tableRows.forEach(row => {
+            labels.push(row.children[0].innerText);
+            data.push(Math.floor(Math.random() * 100) + 20);
+        });
+
+        const ctx = document.getElementById('submissionChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Submission Data',
+                    data: data,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>

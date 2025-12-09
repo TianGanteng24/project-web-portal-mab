@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Case</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- HEADER -->
+    <header class="bg-[#002d6b] text-white px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <img src="" class="w-10" />
+            <h1 class="text-xl font-bold tracking-wide">WEB PORTAL</h1>
+        </div>
+        <div class="flex items-center gap-2">
+            <span>Hi, <%= user.username %></span>
+            <i class="fa-solid fa-user-tie text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="bg-gray-200 px-8 py-3 flex gap-4 text-sm font-medium">
+        <a href="/" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Main Page</a>
+        <a href="/dashboard-admin" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Dashboard</a>
+        <a href="/member-data" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Member Data</a>
+        <a href="/submit-case" class="px-4 py-2 rounded bg-blue-200 font-bold">Submit Case</a>
+        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Report</a>
+    </nav>
+
+    <main class="px-8 py-6">
+        <h2 class="text-xl font-bold mb-6">Submit Case</h2>
+
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- LEFT SIDE -->
+            <div class="flex flex-col gap-4">
+                
+                <div>
+                    <label class="font-semibold">NIK</label>
+                    <input type="text" class="w-full p-3 border rounded mt-1">
+                </div>
+
+                <div>
+                    <label class="font-semibold">Nama</label>
+                    <input disabled value="Auto generate"
+                    class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-500">
+                </div>
+
+                <div>
+                    <label class="font-semibold">Usia</label>
+                    <input disabled value="Auto generate"
+                    class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-500">
+                </div>
+
+                <div>
+                    <label class="font-semibold">Nama Produk</label>
+                    <input disabled value="Auto generate"
+                    class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-500">
+
+                    <p class="text-xs text-gray-600 mt-1">
+                        Apabila lebih dari satu maka system akan menanyakan:
+                        akan di-claim dari produk yang mana
+                    </p>
+                </div>
+
+                <div>
+                    <label class="font-semibold">Jenis Kasus</label>
+                    <select class="w-full p-3 border rounded mt-1">
+                        <option hidden>Pilih Jenis Kasus</option>
+                        <option>High-Cost Claim</option>
+                        <option>Complex Case</option>
+                        <option>Repeat Hospitalization</option>
+                        <option>Fraud / Abuse Suspicion</option>
+                        <option>Dispute Case</option>
+                        <option>Planned Major Surgery</option>
+                        <option>Prolonged Stay</option>
+                    </select>
+
+                    <p class="text-xs text-gray-600 mt-1">
+                        Drop Down Option: High-Cost Claim / Complex Case / Repeat Hospitalization / Fraud or Abuse Suspicion / Dispute Case…
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="flex flex-col gap-4">
+
+                <div>
+                    <label class="font-semibold">Nama Rumah Sakit</label>
+                    <input type="text" class="w-full p-3 border rounded mt-1">
+                </div>
+
+                <div>
+                    <label class="font-semibold">Tanggal Masuk Rumah Sakit</label>
+                    <input type="date" class="w-full p-3 border rounded mt-1">
+                </div>
+
+                <div>
+                    <label class="font-semibold">Tanggal Keluar Rumah Sakit</label>
+                    <input type="date" class="w-full p-3 border rounded mt-1">
+                </div>
+
+                <div>
+                    <label class="font-semibold">Upload Document</label>
+                    <input type="file" multiple class="w-full p-2 border rounded mt-1 text-sm">
+                    <p class="text-xs text-gray-600 mt-1">
+                        Upload Rekam Medis, Upload Billing, Upload Hasil Lab, Upload Polis
+                    </p>
+                </div>
+
+                <div>
+                    <label class="font-semibold">Ringkasan Kasus</label>
+                    <textarea rows="4" class="w-full p-3 border rounded mt-1"></textarea>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="mt-8 text-right">
+            <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+                Submit Case
+            </button>
+        </div>
+
+    </main>
+</body>
+</html>
