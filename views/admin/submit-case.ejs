@@ -1,133 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Case</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Submit Case</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <style>
+    /* small dropdown result style */
+    .result-box { position: relative; }
+    .result-list {
+      position: absolute;
+      z-index: 50;
+      width: 100%;
+      max-height: 220px;
+      overflow-y: auto;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+  </style>
 </head>
-
 <body class="bg-gray-100 font-sans">
 
-    <!-- HEADER -->
-    <header class="bg-[#002d6b] text-white px-8 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <img src="" class="w-10" />
-            <h1 class="text-xl font-bold tracking-wide">WEB PORTAL</h1>
-        </div>
-        <div class="flex items-center gap-2">
-            <span>Hi, <%= user.username %></span>
-            <i class="fa-solid fa-user-tie text-2xl"></i>
-        </div>
-    </header>
+  <!-- HEADER -->
+  <header class="bg-[#002d6b] text-white px-8 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-4">
+      <img src="" alt="logo" class="w-10">
+      <h1 class="text-xl font-bold tracking-wide">WEB PORTAL</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <span>Hi, <%= user.username %></span>
+      <i class="fa-solid fa-user-tie text-2xl"></i>
+    </div>
+  </header>
 
-    <!-- NAV -->
-    <nav class="bg-gray-200 px-8 py-3 flex gap-4 text-sm font-medium">
-        <a href="/" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Main Page</a>
-        <a href="/dashboard-admin" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Dashboard</a>
-        <a href="/member-data" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Member Data</a>
-        <a href="/submit-case" class="px-4 py-2 rounded bg-blue-200 font-bold">Submit Case</a>
-        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Report</a>
-    </nav>
+  <!-- NAV -->
+  <nav class="bg-gray-200 px-8 py-3 flex gap-4 text-sm font-medium">
+    <a href="/" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Main Page</a>
+    <a href="/dashboard-admin" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Dashboard</a>
+    <a href="/member-data" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Member Data</a>
+    <a href="/submit-case" class="px-4 py-2 rounded bg-blue-200 font-bold">Submit Case</a>
+    <a class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Report</a>
+  </nav>
 
-    <main class="px-8 py-6">
-        <h2 class="text-xl font-bold mb-6">Submit Case</h2>
+  <main class="px-8 py-6">
+    <h2 class="text-xl font-bold mb-6">Submit Case</h2>
 
-        <form class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- LEFT SIDE -->
-            <div class="flex flex-col gap-4">
-                
-                <div>
-                    <label class="font-semibold">NIK</label>
-                    <input type="text" class="w-full p-3 border rounded mt-1">
-                </div>
+    <form action="/submit-case" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- LEFT -->
+      <div class="flex flex-col gap-4">
 
-                <div>
-                    <label class="font-semibold">Nama</label>
-                    <input disabled value="Auto generate"
-                    class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-500">
-                </div>
-
-                <div>
-                    <label class="font-semibold">Usia</label>
-                    <input disabled value="Auto generate"
-                    class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-500">
-                </div>
-
-                <div>
-                    <label class="font-semibold">Nama Produk</label>
-                    <input disabled value="Auto generate"
-                    class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-500">
-
-                    <p class="text-xs text-gray-600 mt-1">
-                        Apabila lebih dari satu maka system akan menanyakan:
-                        akan di-claim dari produk yang mana
-                    </p>
-                </div>
-
-                <div>
-                    <label class="font-semibold">Jenis Kasus</label>
-                    <select class="w-full p-3 border rounded mt-1">
-                        <option hidden>Pilih Jenis Kasus</option>
-                        <option>High-Cost Claim</option>
-                        <option>Complex Case</option>
-                        <option>Repeat Hospitalization</option>
-                        <option>Fraud / Abuse Suspicion</option>
-                        <option>Dispute Case</option>
-                        <option>Planned Major Surgery</option>
-                        <option>Prolonged Stay</option>
-                    </select>
-
-                    <p class="text-xs text-gray-600 mt-1">
-                        Drop Down Option: High-Cost Claim / Complex Case / Repeat Hospitalization / Fraud or Abuse Suspicion / Dispute Case…
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- RIGHT SIDE -->
-            <div class="flex flex-col gap-4">
-
-                <div>
-                    <label class="font-semibold">Nama Rumah Sakit</label>
-                    <input type="text" class="w-full p-3 border rounded mt-1">
-                </div>
-
-                <div>
-                    <label class="font-semibold">Tanggal Masuk Rumah Sakit</label>
-                    <input type="date" class="w-full p-3 border rounded mt-1">
-                </div>
-
-                <div>
-                    <label class="font-semibold">Tanggal Keluar Rumah Sakit</label>
-                    <input type="date" class="w-full p-3 border rounded mt-1">
-                </div>
-
-                <div>
-                    <label class="font-semibold">Upload Document</label>
-                    <input type="file" multiple class="w-full p-2 border rounded mt-1 text-sm">
-                    <p class="text-xs text-gray-600 mt-1">
-                        Upload Rekam Medis, Upload Billing, Upload Hasil Lab, Upload Polis
-                    </p>
-                </div>
-
-                <div>
-                    <label class="font-semibold">Ringkasan Kasus</label>
-                    <textarea rows="4" class="w-full p-3 border rounded mt-1"></textarea>
-                </div>
-            </div>
-
-        </form>
-
-        <div class="mt-8 text-right">
-            <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-                Submit Case
-            </button>
+        <!-- NIK (searchable by name, stores NIK) -->
+        <div class="result-box">
+          <label class="font-semibold">NIK (ketik NIK untuk cari)</label>
+          <input id="nikInput" name="nik" type="hidden" class="w-full p-3 border rounded mt-1">
+          <input id="nikDisplay" type="text" class="w-full p-3 border rounded mt-1" placeholder="Ketik nama member..." autocomplete="off" required>
+          <div id="nikResults" class="result-list bg-white hidden"></div>
         </div>
 
-    </main>
+        <div>
+          <label class="font-semibold">Nama</label>
+          <input id="nama" name="nama" type="text" class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-700" readonly>
+        </div>
+
+        <div>
+          <label class="font-semibold">Usia</label>
+          <input id="usia" name="usia" type="text" class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-700" readonly>
+        </div>
+
+        <div>
+          <label class="font-semibold">Nama Produk</label>
+          <input id="produk" name="nama_produk" type="text" class="w-full p-3 border rounded mt-1 bg-gray-100 text-gray-700" readonly>
+          <p class="text-xs text-gray-600 mt-1">Jika lebih dari satu produk, system akan menanyakan produk mana yang akan di-claim.</p>
+        </div>
+
+        <div>
+          <label class="font-semibold">Jenis Kasus</label>
+          <select name="jenis_kasus" class="w-full p-3 border rounded mt-1" required>
+            <option hidden>Pilih Jenis Kasus</option>
+            <option>High-Cost Claim</option>
+            <option>Complex Case</option>
+            <option>Repeat Hospitalization</option>
+            <option>Fraud / Abuse Suspicion</option>
+            <option>Dispute Case</option>
+            <option>Planned Major Surgery</option>
+            <option>Prolonged Stay</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="flex flex-col gap-4">
+        <div>
+          <label class="font-semibold">Nama Rumah Sakit</label>
+          <input name="rs" type="text" class="w-full p-3 border rounded mt-1" required>
+        </div>
+
+        <div>
+          <label class="font-semibold">Tanggal Masuk Rumah Sakit</label>
+          <input name="tanggal_masuk" type="date" class="w-full p-3 border rounded mt-1" required>
+        </div>
+
+        <div>
+          <label class="font-semibold">Tanggal Keluar Rumah Sakit</label>
+          <input name="tanggal_keluar" type="date" class="w-full p-3 border rounded mt-1" required>
+        </div>
+
+        <div>
+          <label class="font-semibold">Submit Document</label>
+          <input name="documents" type="file" multiple class="w-full p-2 border rounded mt-1 text-sm">
+          <p class="text-xs text-gray-600 mt-1">Submit Rekam Medis, Billing, Hasil Lab, Polis (opsional)</p>
+        </div>
+
+        <div>
+          <label class="font-semibold">Ringkasan Kasus</label>
+          <textarea name="ringkasan" rows="4" class="w-full p-3 border rounded mt-1" required></textarea>
+        </div>
+      </div>
+
+      <div class="md:col-span-2 text-right">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Submit Case</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // debounce helper
+    function debounce(fn, delay = 300){
+      let t;
+      return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn.apply(this, args), delay);
+      }
+    }
+
+    const input = document.getElementById('nikDisplay');
+    const nikInput = document.getElementById('nikInput');
+    const resultsBox = document.getElementById('nikResults');
+    const namaField = document.getElementById('nama');
+    const usiaField = document.getElementById('usia');
+    const produkField = document.getElementById('produk');
+
+    input.addEventListener('input', debounce(async (e) => {
+      const q = e.target.value.trim();
+      if (q.length < 2) {
+        resultsBox.classList.add('hidden');
+        resultsBox.innerHTML = '';
+        return;
+      }
+
+      try {
+        const resp = await fetch(`/api/member-search?keyword=${encodeURIComponent(q)}`);
+        const data = await resp.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+          resultsBox.innerHTML = '<div class="p-2 text-sm text-gray-500">Tidak ditemukan</div>';
+          resultsBox.classList.remove('hidden');
+          return;
+        }
+
+        resultsBox.innerHTML = data.map(item => {
+          // show Nama + NIK kecil
+          return `<div class="px-3 py-2 hover:bg-gray-100 cursor-pointer flex justify-between items-center"
+                       data-nik="${item.nik}"
+                       data-nama="${item.nama}"
+                       data-tgl="${item.tgl_lahir}"
+                       data-produk="${item.nama_produk || ''}">
+                    <div>
+                      <div class="font-medium">${item.nama}</div>
+                      <div class="text-xs text-gray-500">NIK: ${item.nik}</div>
+                    </div>
+                    <div class="text-xs text-gray-400">pilih</div>
+                  </div>`;
+        }).join('');
+
+        // attach click listeners
+        resultsBox.querySelectorAll('div').forEach(el => {
+          el.addEventListener('click', () => {
+            const nik = el.getAttribute('data-nik');
+            const nama = el.getAttribute('data-nama');
+            const tgl = el.getAttribute('data-tgl');
+            const produk = el.getAttribute('data-produk');
+
+            input.value = nama;
+            nikInput.value = nik;
+            namaField.value = nama;
+
+            if (tgl) {
+              const dob = new Date(tgl);
+              const age = Math.floor((Date.now() - dob.getTime()) / 31557600000);
+              usiaField.value = age;
+            } else {
+              usiaField.value = '';
+            }
+
+            produkField.value = produk || '';
+            resultsBox.classList.add('hidden');
+            resultsBox.innerHTML = '';
+          });
+        });
+
+        resultsBox.classList.remove('hidden');
+      } catch (err) {
+        console.error(err);
+        resultsBox.innerHTML = '<div class="p-2 text-sm text-red-500">Terjadi kesalahan</div>';
+        resultsBox.classList.remove('hidden');
+      }
+    }, 300));
+
+    // hide on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.result-box')) {
+        resultsBox.classList.add('hidden');
+      }
+    });
+  </script>
+  <script>
+        (function(){
+            const urlParams = new URLSearchParams(window.location.search);
+            const SubmitParam = urlParams.get('submit');
+            if (!SubmitParam) return; // only show an alert when the param exists
+
+            if (SubmitParam === 'success') {
+                swal({
+                    title: 'Submit Success',
+                    text: 'You have successfully logged in',
+                    icon: 'success',
+                    button: 'OK'
+                });
+            } else {
+                swal({
+                    title: 'Submit Failed',
+                    text: 'Invalid username or password',
+                    icon: 'error',
+                    button: 'OK'
+                });
+            }
+        })();
+    </script>
 </body>
 </html>

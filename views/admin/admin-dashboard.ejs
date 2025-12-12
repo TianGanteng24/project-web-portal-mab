@@ -5,135 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Portal Dashboard</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-K5mXtUHQ5XKukdxbYlR5c+Y7PkF9vDOMkMt2rt7NmBGG99nmCaTKty+O+kO5OVwOBLRp5MNDoAuCEr0aKBdKg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- SweetAlert -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
+
 <body class="bg-gray-100 font-sans">
-     <!-- HEADER -->
+    <!-- HEADER -->
     <header class="bg-[#002d6b] text-white px-8 py-4 flex justify-between items-center">
         <div class="flex items-center gap-4">
-            <img src="" alt="icon mab" class="w-10" />
+            <img src="" alt="logo" class="w-10">
             <h1 class="text-xl font-bold tracking-wide">WEB PORTAL</h1>
         </div>
+
         <div class="flex items-center gap-2">
             <span>Hi, <%= user.username %></span>
             <i class="fa-solid fa-user-tie text-2xl"></i>
         </div>
     </header>
 
-    <!-- NAV MENU -->
+    <!-- NAV -->
     <nav class="bg-gray-200 px-8 py-3 flex gap-4 text-sm font-medium">
-        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Main Page</a>
+        <a class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Main Page</a>
         <a href="/dashboard-admin" class="px-4 py-2 rounded bg-blue-200 font-bold">Dashboard</a>
-        <a href="/member-data" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Member Data</a>
-        <a href="/submit-case" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Submit Case</a>
-        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Report</a>
+        <a href="/member-data" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Member Data</a>
+        <a href="/submit-case" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Submit Case</a>
+        <a class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Report</a>
     </nav>
-
 
     <div class="p-6">
         <h2 class="text-2xl font-semibold mb-6">Dashboard</h2>
 
-        <!-- Dashboard Cards -->
+        <!-- STATIC DASHBOARD CARDS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             <div class="bg-white rounded-lg shadow p-6 text-center">
-                <h2 class="text-3xl font-bold">24</h2>
+                <h2 class="text-3xl font-bold"><%= caseSubmitted %></h2>
                 <p class="text-gray-600">Case Submitted</p>
             </div>
             <div class="bg-white rounded-lg shadow p-6 text-center">
-                <h2 class="text-3xl font-bold">8</h2>
+                <h2 class="text-3xl font-bold"><%= underReview %></h2>
                 <p class="text-gray-600">Under Review</p>
             </div>
             <div class="bg-white rounded-lg shadow p-6 text-center">
-                <h2 class="text-3xl font-bold">15</h2>
+                <h2 class="text-3xl font-bold"><%= completed %></h2>
                 <p class="text-gray-600">Completed</p>
             </div>
             <div class="bg-white rounded-lg shadow p-6 text-center">
-                <h2 class="text-3xl font-bold">2</h2>
+                <h2 class="text-3xl font-bold"><%= reports %></h2>
                 <p class="text-gray-600">Reports</p>
             </div>
         </div>
 
-        <!-- Total Member -->
+        <!-- TOTAL MEMBER -->
         <div class="text-right mb-10">
             <h3 class="text-lg font-medium">Total Member</h3>
-            <h1 class="text-4xl font-extrabold">75,000</h1>
+            <h1 class="text-4xl font-extrabold"><%= totalMember %></h1>
         </div>
 
-        <!-- Recent Submission Table -->
-        <h3 class="text-lg font-semibold mb-2">Recent Submission</h3>
+        <!-- RECENT SUBMISSION -->
+        <h3 class="text-lg font-semibold mb-3">Recent Submission</h3>
+
         <div class="overflow-x-auto">
-            <table id="submissionTable" class="w-full bg-white rounded shadow">
+            <table class="w-full bg-white rounded shadow">
                 <thead class="bg-gray-300">
                     <tr>
                         <th class="p-3 text-left">Submission ID</th>
-                        <th class="p-3 text-left">Date Submitted</th>
+                        <th class="p-3 text-left">Tanggal</th>
                         <th class="p-3 text-left">Status</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr>
-                        <td class="p-3 border">MEDI0101</td>
-                        <td class="p-3 border">01/01/2025</td>
-                        <td class="p-3 border">Completed</td>
+                    <% if (recent.length === 0) { %>
+                        <tr><td class="p-3 border" colspan="3">Belum ada data.</td></tr>
+                    <% } %>
+
+                    <% recent.forEach(r => { %>
+                    <tr class="odd:bg-gray-50">
+                        <td class="p-3 border"><%= r.id %></td>
+                        <td class="p-3 border"><%= r.created_at.toLocaleDateString() %></td>
+                        <td class="p-3 border"><%= r.status ?? "Submitted" %></td>
                     </tr>
-                    <tr>
-                        <td class="p-3 border">MEDI0102</td>
-                        <td class="p-3 border">11/01/2025</td>
-                        <td class="p-3 border">In Progress</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3 border">MEDI0103</td>
-                        <td class="p-3 border">15/01/2025</td>
-                        <td class="p-3 border">In Progress</td>
-                    </tr>
+                    <% }) %>
                 </tbody>
             </table>
         </div>
 
-        <!-- Chart Section -->
+        <!-- CHART -->
         <h3 class="text-lg font-semibold mt-10 mb-4">Submission Chart</h3>
         <canvas id="submissionChart" class="w-full max-h-[400px]"></canvas>
     </div>
 
-    <!-- ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        const tableRows = document.querySelectorAll('#submissionTable tbody tr');
-        const labels = [];
-        const data = [];
-
-        tableRows.forEach(row => {
-            labels.push(row.children[0].innerText);
-            data.push(Math.floor(Math.random() * 100) + 20);
-        });
+        const monthLabels = <%- JSON.stringify(chart.map(c => "Bulan " + c.bulan)) %>;
+        const monthTotals = <%- JSON.stringify(chart.map(c => c.total)) %>;
 
         const ctx = document.getElementById('submissionChart').getContext('2d');
+        
         new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
-                labels: labels,
+                labels: monthLabels,
                 datasets: [{
-                    label: 'Submission Data',
-                    data: data,
-                    borderWidth: 1
+                    label: 'Jumlah Case',
+                    data: monthTotals,
+                    borderWidth: 2,
+                    fill: false
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+                scales: { y: { beginAtZero: true } }
             }
         });
     </script>

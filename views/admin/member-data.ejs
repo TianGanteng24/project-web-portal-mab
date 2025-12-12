@@ -1,91 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Data</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Member Data</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body class="bg-gray-100 font-sans">
-    <!-- HEADER -->
-    <header class="bg-[#002d6b] text-white px-8 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <img src="" alt="icon mab" class="w-10" />
-            <h1 class="text-xl font-bold tracking-wide">WEB PORTAL</h1>
-        </div>
-        <div class="flex items-center gap-2">
-            <span>Hi, <%= user.username %></span>
-            <i class="fa-solid fa-user-tie text-2xl"></i>
-        </div>
-    </header>
 
-    <!-- NAV MENU -->
-    <nav class="bg-gray-200 px-8 py-3 flex gap-4 text-sm font-medium">
-        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Main Page</a>
-        <a href="/dashboard-admin" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Dashboard</a>
-        <a href="/member-data" class="px-4 py-2 rounded bg-blue-200 font-bold">Member Data</a>
-        <a href="/submit-case" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Submit Case</a>
-        <a href="#" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition">Report</a>
-    </nav>
+  <!-- HEADER -->
+  <header class="bg-[#002d6b] text-white px-8 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-4">
+      <img src="" alt="logo" class="w-10">
+      <h1 class="text-xl font-bold tracking-wide">WEB PORTAL</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <span>Hi, <%= user.username %></span>
+      <i class="fa-solid fa-user-tie text-2xl"></i>
+    </div>
+  </header>
 
-    <!-- CONTENT -->
-    <main class="px-8 py-6">
-        <h2 class="text-xl font-bold mb-4">Member Data</h2>
+  <!-- NAV -->
+  <nav class="bg-gray-200 px-8 py-3 flex gap-4 text-sm font-medium">
+    <a href="/" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Main Page</a>
+    <a href="/dashboard-admin" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Dashboard</a>
+    <a href="/member-data" class="px-4 py-2 rounded bg-blue-200 font-bold">Member Data</a>
+    <a href="/submit-case" class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Submit Case</a>
+    <a class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Report</a>
+  </nav>
 
-        <!-- TABLE -->
-        <div class="overflow-x-auto bg-white rounded shadow">
-            <table class="w-full text-sm">
-                <thead class="bg-gray-300 text-gray-700">
-                    <tr>
-                        <th class="p-3 text-left">NIK</th>
-                        <th class="p-3 text-left">No BPJS (jika ada)</th>
-                        <th class="p-3 text-left">Nama</th>
-                        <th class="p-3 text-left">Tgl Lahir</th>
-                        <th class="p-3 text-left">Nama Produk</th>
-                        <th class="p-3 text-left">Nomor Polis</th>
-                        <th class="p-3 text-left">Tanggal Issued</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="odd:bg-gray-50">
-                        <td class="p-3 border">3201123456788888</td>
-                        <td class="p-3 border">1234567890123</td>
-                        <td class="p-3 border">Andi Pratama</td>
-                        <td class="p-3 border">12/08/1995</td>
-                        <td class="p-3 border">Silver Plan</td>
-                        <td class="p-3 border">0012345</td>
-                        <td class="p-3 border">01/01/2025</td>
-                    </tr>
-                    <tr class="odd:bg-gray-50">
-                        <td class="p-3 border">3201876543212222</td>
-                        <td class="p-3 border">-</td>
-                        <td class="p-3 border">Siti Maesaroh</td>
-                        <td class="p-3 border">28/02/1990</td>
-                        <td class="p-3 border">Gold Plan</td>
-                        <td class="p-3 border">0015678</td>
-                        <td class="p-3 border">05/01/2025</td>
-                    </tr>
-                    <tr class="odd:bg-gray-50">
-                        <td class="p-3 border">3201567891111444</td>
-                        <td class="p-3 border">8877665544332</td>
-                        <td class="p-3 border">Budi Setiawan</td>
-                        <td class="p-3 border">09/10/1988</td>
-                        <td class="p-3 border">Platinum Plan</td>
-                        <td class="p-3 border">0099999</td>
-                        <td class="p-3 border">10/01/2025</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <main class="px-8 py-6">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-bold mb-4">Member Data</h2>
 
-        <!-- EXCEL UPLOAD TEXT -->
-        <p class="mt-6 font-medium text-lg">Excel bisa di-upload disini</p>
-    </main>
+      <!-- Upload CSV -->
+      <form action="/member-data/upload" method="POST" enctype="multipart/form-data" class="flex items-center gap-2">
+        <input type="file" name="csvfile" accept=".csv" required class="p-2 border rounded bg-white"/>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Upload CSV</button>
+      </form>
+    </div>
+
+    <!-- OPTIONAL: small help text / expected csv columns -->
+    <p class="text-sm text-gray-600 mb-4">Format CSV minimal: <code>nik,bpjs,nama,tgl_lahir,nama_produk,nomor_polis,issued_date</code></p>
+
+    <!-- TABLE -->
+    <div class="overflow-x-auto bg-white rounded shadow">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-300 text-gray-700">
+          <tr>
+            <th class="p-3 text-left">NIK</th>
+            <th class="p-3 text-left">No BPJS</th>
+            <th class="p-3 text-left">Nama</th>
+            <th class="p-3 text-left">Tgl Lahir</th>
+            <th class="p-3 text-left">Usia</th>
+            <th class="p-3 text-left">Nama Produk</th>
+            <th class="p-3 text-left">No Polis</th>
+            <th class="p-3 text-left">Issued Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if (!members || members.length === 0) { %>
+            <tr>
+              <td class="p-3 border" colspan="8">Belum ada data member.</td>
+            </tr>
+          <% } else { %>
+            <% members.forEach(m => { 
+                 const dob = m.tgl_lahir ? new Date(m.tgl_lahir) : null;
+                 const usia = dob ? Math.floor((Date.now() - dob.getTime()) / 31557600000) : '-';
+            %>
+            <tr class="odd:bg-gray-50">
+              <td class="p-3 border"><%= m.nik %></td>
+              <td class="p-3 border"><%= m.bpjs || '-' %></td>
+              <td class="p-3 border"><%= m.nama %></td>
+              <td class="p-3 border"><%= m.tgl_lahir ? (new Date(m.tgl_lahir)).toLocaleDateString() : '-' %></td>
+              <td class="p-3 border"><%= usia %></td>
+              <td class="p-3 border"><%= m.nama_produk || '-' %></td>
+              <td class="p-3 border"><%= m.nomor_polis || '-' %></td>
+              <td class="p-3 border"><%= m.issued_date ? (new Date(m.issued_date)).toLocaleDateString() : '-' %></td>
+            </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <script>
+        (function(){
+            const urlParams = new URLSearchParams(window.location.search);
+            const UploadParam = urlParams.get('upload');
+            if (!UploadParam) return; // only show an alert when the param exists
+
+            if (UploadParam === 'success') {
+                swal({
+                    title: 'Upload Success',
+                    text: 'You have successfully logged in',
+                    icon: 'success',
+                    button: 'OK'
+                });
+            } else {
+                swal({
+                    title: 'Upload Failed',
+                    text: 'Invalid username or password',
+                    icon: 'error',
+                    button: 'OK'
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
