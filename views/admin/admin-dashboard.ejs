@@ -63,39 +63,52 @@
             <h1 class="text-4xl font-extrabold"><%= totalMember %></h1>
         </div>
 
-        <!-- RECENT SUBMISSION -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- TABLE -->
+    <div class="bg-white rounded shadow p-4">
         <h3 class="text-lg font-semibold mb-3">Recent Submission</h3>
 
-        <div class="overflow-x-auto">
-            <table class="w-full bg-white rounded shadow">
+        <div class="overflow-x-auto max-h-[280px]">
+            <table class="w-full text-sm">
                 <thead class="bg-gray-300">
                     <tr>
-                        <th class="p-3 text-left">Submission ID</th>
-                        <th class="p-3 text-left">Tanggal</th>
-                        <th class="p-3 text-left">Status</th>
+                        <th class="p-2 text-left">Submission ID</th>
+                        <th class="p-2 text-left">Tanggal</th>
+                        <th class="p-2 text-left">Status</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <% if (recent.length === 0) { %>
-                        <tr><td class="p-3 border" colspan="3">Belum ada data.</td></tr>
+                        <tr>
+                            <td class="p-2 border" colspan="3">Belum ada data.</td>
+                        </tr>
                     <% } %>
 
                     <% recent.forEach(r => { %>
                     <tr class="odd:bg-gray-50">
-                        <td class="p-3 border"><%= r.id %></td>
-                        <td class="p-3 border"><%= r.created_at.toLocaleDateString() %></td>
-                        <td class="p-3 border"><%= r.status ?? "Submitted" %></td>
+                        <td class="p-2 border"><%= r.id %></td>
+                        <td class="p-2 border"><%= r.created_at.toLocaleDateString() %></td>
+                        <td class="p-2 border"><%= r.status ?? "Submitted" %></td>
                     </tr>
                     <% }) %>
                 </tbody>
             </table>
         </div>
-
-        <!-- CHART -->
-        <h3 class="text-lg font-semibold mt-10 mb-4">Submission Chart</h3>
-        <canvas id="submissionChart" class="w-full max-h-[400px]"></canvas>
     </div>
+
+    <!-- CHART -->
+    <div class="bg-white rounded shadow p-4">
+        <h3 class="text-lg font-semibold mb-3">Submission Chart</h3>
+
+        <div class="h-[280px]">
+            <canvas id="submissionChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -117,10 +130,13 @@
                 }]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } }
-            }
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        y: { beginAtZero: true }
+    }
+}
+
         });
     </script>
 
